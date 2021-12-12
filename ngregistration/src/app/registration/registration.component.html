@@ -1,0 +1,49 @@
+<div class="signup-form">
+  <form #RegisterForm = "ngForm" (ngSubmit)="registerUser()">
+    <h2>Register</h2>
+    <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-6">
+          <input type="text" class="form-control" placeholder="First Name" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" required
+                 [class.is-invalid]="firstName.invalid && firstName.touched">
+          <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">First Name is required</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+    <div class="row">
+      <div class="col-xs-6">
+        <input type="text" class="form-control" placeholder="Last Name" name="lastName" [(ngModel)]="user.lastName" required #lastName="ngModel" aria-required="true"
+               [class.is-invalid]="lastName.invalid && lastName.touched">
+        <small class="text-danger" [class.d-none]="lastName.valid || lastName.untouched">Last Name is required</small>
+      </div>
+    </div>
+  </div>
+    <div class="form-group">
+      <input #email="ngModel" [(ngModel)]="user.email" [class.is-invalid]="email.invalid && email.touched"
+             class="form-control" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+             placeholder="Enter email"
+             required
+             type="email">
+      <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Enter password" name="password" [(ngModel)]="user.password" #password="ngModel" required
+      [class.is-invalid]="password.invalid && password.touched"
+      >
+      <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password" #cpassword = "ngModel"(ngModel)="user.password" required
+             [class.is-invalid]="cpassword.invalid && password.touched">
+      <small class="text-danger" [class.d-none]="(cpassword.value == password.value) || cpassword.untouched">Password don't match.</small>
+    </div>
+    <div class="form-group">
+      <button [disabled]="RegisterForm.form.invalid" type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+    </div>
+  </form>
+  <div class="text-center">
+    <small (click)="goToLogin()">Already have an account? Log In</small>
+  </div>
+</div>
